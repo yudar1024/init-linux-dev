@@ -23,7 +23,7 @@ RUN chmod +x .fnm/fnm
 RUN echo 'eval "$(.fnm/fnm env --use-on-cd)"' >> ~/.zshrc 
 RUN echo 'export PATH="$HOME/.fnm:$PATH"' >> ~/.zshrc
 RUN ["/bin/zsh","-c","source ~/.zshrc && fnm install --node-dist-mirror https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/ --lts"]
-RUN ["/bin/zsh","-c","./.fnm/fnm completions --shell zsh"]
+RUN ["/bin/zsh","-c","~/.fnm/fnm completions --shell zsh"]
 RUN ["/bin/zsh","-c","git clone https://gitee.com/mirrors/pyenv.git ~/.pyenv"]
 RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 RUN echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
@@ -38,4 +38,4 @@ RUN echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 EXPOSE 3000
 EXPOSE 8000
 #RUN ["/bin/sh", "-c", "  apt install openssh-server -y"]
-#RUN ["/bin/sh", "-c", "  apt install openssh-client -y"]
+#RUN ["/bent -y"]in/sh", "-c", "  apt install openssh-cli
