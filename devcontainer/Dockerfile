@@ -21,17 +21,19 @@ RUN mkdir .fnm
 COPY fnm .fnm
 RUN chmod +x .fnm/fnm
 RUN echo 'eval "$(.fnm/fnm env --use-on-cd)"' >> ~/.zshrc 
-# RUN .fnm/fnm install --lts
-# RUN ["/bin/zsh","-c","source ~/.zshrc && fnm install --lts"]
-# RUN curl -fsSL https://fnm.vercel.app/install | /bin/zsh -s -- --install-dir "./.fnm" --skip-shell
-# RUN ["/bin/zsh","-c","./.fnm/fnm completions --shell zsh"]
+RUN echo 'export PATH="$HOME/.fnm:$PATH"' >> ~/.zshrc
+RUN ["/bin/zsh","-c","source ~/.zshrc && fnm install --node-dist-mirror https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/ --lts"]
+RUN ["/bin/zsh","-c","./.fnm/fnm completions --shell zsh"]
 RUN ["/bin/zsh","-c","git clone https://gitee.com/mirrors/pyenv.git ~/.pyenv"]
 RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 RUN echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
 RUN echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+RUN mkdir ~/.pip
+COPY pip.conf .pip
 RUN mkdir ~/.pyenv/cache
 RUN wget -P ~/.pyenv/cache https://repo.huaweicloud.com/python/3.11.6/Python-3.11.6.tar.xz
 RUN ["/bin/zsh","-c","source ~/.zshrc && pyenv -h && cd && pyenv install 3.11.6"]
 RUN ["/bin/zsh","-c","source ~/.zshrc && pip install --user pipenv"]
+RUN echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 #RUN ["/bin/sh", "-c", "  apt install openssh-server -y"]
 #RUN ["/bin/sh", "-c", "  apt install openssh-client -y"]
