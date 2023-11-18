@@ -20,7 +20,7 @@ RUN ["/bin/sh", "-c", "  apt install build-essential libbz2-dev libffi-dev liblz
 RUN mkdir .fnm
 COPY fnm .fnm
 RUN chmod +x .fnm/fnm
-RUN echo 'eval "$(.fnm/fnm env --use-on-cd)"' >> ~/.zshrc 
+RUN echo 'eval "$(~/.fnm/fnm env --use-on-cd)"' >> ~/.zshrc 
 RUN echo 'export PATH="$HOME/.fnm:$PATH"' >> ~/.zshrc
 RUN ["/bin/zsh","-c","source ~/.zshrc && fnm install --node-dist-mirror https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/ --lts"]
 RUN ["/bin/zsh","-c","~/.fnm/fnm completions --shell zsh"]
@@ -35,6 +35,8 @@ RUN wget -P ~/.pyenv/cache https://repo.huaweicloud.com/python/3.11.6/Python-3.1
 RUN ["/bin/zsh","-c","source ~/.zshrc && pyenv -h && cd && pyenv install 3.11.6"]
 RUN ["/bin/zsh","-c","source ~/.zshrc && pip install --user pipenv"]
 RUN echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+RUN ["/bin/zsh","-c","source ~/.zshrc && npm config set registry https://registry.npmmirror.com"]
+RUN ["/bin/zsh","-c","source ~/.zshrc && npm install -g pnpm"]
 EXPOSE 3000
 EXPOSE 8000
 #RUN ["/bin/sh", "-c", "  apt install openssh-server -y"]
