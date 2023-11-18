@@ -35,5 +35,7 @@ RUN wget -P ~/.pyenv/cache https://repo.huaweicloud.com/python/3.11.6/Python-3.1
 RUN ["/bin/zsh","-c","source ~/.zshrc && pyenv -h && cd && pyenv install 3.11.6"]
 RUN ["/bin/zsh","-c","source ~/.zshrc && pip install --user pipenv"]
 RUN echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+EXPOSE 3000
+EXPOSE 8000
 #RUN ["/bin/sh", "-c", "  apt install openssh-server -y"]
 #RUN ["/bin/sh", "-c", "  apt install openssh-client -y"]
