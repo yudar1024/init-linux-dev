@@ -39,5 +39,10 @@ RUN ["/bin/zsh","-c","source ~/.zshrc && npm config set registry https://registr
 RUN ["/bin/zsh","-c","source ~/.zshrc && npm install -g pnpm"]
 EXPOSE 3000
 EXPOSE 8000
-#RUN ["/bin/sh", "-c", "  apt install openssh-server -y"]
-#RUN ["/bent -y"]in/sh", "-c", "  apt install openssh-cli
+# usage
+# step 1 create voluem
+# docker volume create --driver local --opt type=none --opt o=bind --opt device=/Users/rogercc/dev/webapp/nextjs-study mywork
+# step 2 run docker
+# docker run -it --privileged -P --rm  --mount type=volume,source=mywork,target=/root/webapp/nextjs-study devcontainer-arm64
+# create volume on docker run directly
+# docker run -it --rm --mount type=volume,dst=/container/path,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device=/home/user/test foo
