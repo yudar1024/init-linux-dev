@@ -25,3 +25,9 @@ curl -fsSL https://fnm.vercel.app/install | bash
 source .zshrc
 sudo chsh -s $(which zsh) $(whoami)
 
+#no sudo use docker command for non-root user
+sudo groupadd docker
+sudo gpasswd -a ${user} docker
+sudo systemctl restart docker
+sudo chmod a+rw /var/run/docker.sock
+
